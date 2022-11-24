@@ -1,13 +1,13 @@
 import sendgrid
 import os
-from sendgrid.helpers.mail import Mail, Email, To, Content
+from sendgrid.helpers.mail import Mail, Content
 
 sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
-from_email = Email("mikal.stapnes@visma.com")  # Change to your verified sender
-to_email = To("mikal.stapnes@visma.com")  # Change to your recipient
-subject = "Sending with SendGrid is Fun"
-content = Content("text/plain", "and easy to do anywhere, even with Python")
-mail = Mail(from_email, to_email, subject, content)
+mail = Mail(
+    from_email="mikal.stapnes@visma.com", 
+    to_emails=["mikal.stapnes@visma.com"], 
+    subject="test", 
+    plain_text_content="test")
 
 # Get a JSON-ready representation of the Mail object
 mail_json = mail.get()
