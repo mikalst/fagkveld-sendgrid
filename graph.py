@@ -1,8 +1,12 @@
 import json
 import os
+import requests
+import random
+
 import msal
 
-import requests
+from resources.names import names
+
 
 client_id = '2546f553-3885-4041-b310-2b21222bd4a4'
 client_secret = os.environ.get('AZUREAD_CLIENT_SECRET') 
@@ -32,8 +36,12 @@ if "access_token" in result:
     userId = "mikalst@mikalst.onmicrosoft.com"
     endpoint = f'https://graph.microsoft.com/v1.0/users/{userId}/sendMail'
     toUserEmail = "mikal.stapnes@visma.com"
-    email_msg = {'Message': {'Subject': "Test Sending Email from Python",
-                             'Body': {'ContentType': 'Text', 'Content': "This is a test email."},
+
+    hemmelig_venn = names[random.randint(0, len(names))]
+    budsjett = round(random.expovariate(0.005).real)
+
+    email_msg = {'Message': {'Subject': f"Hei, din hemmelige venn er {hemmelig_venn}",
+                             'Body': {'ContentType': 'Text', 'Content': f"og budsjettet ditt er {budsjett} ,- "},
                              'ToRecipients': [{'EmailAddress': {'Address': toUserEmail}}]
                              },
                  'SaveToSentItems': 'true'}

@@ -30,4 +30,4 @@ def sendmail(name, email):
     print(response.status_code)
     print(response.headers)
 
-sendmail("Mikal", 'mikal.stapnes@visma.com')
+sendmail("Mikal", 'ingrid.giaver@visma.com')
