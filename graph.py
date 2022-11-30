@@ -37,7 +37,7 @@ if "access_token" in result:
     endpoint = f'https://graph.microsoft.com/v1.0/users/{userId}/sendMail'
     toUserEmail = "mikal.stapnes@visma.com"
 
-    hemmelig_venn = names[random.randint(0, len(names))]
+    hemmelig_venn = names[random.randint(0, len(names))]["name"]
     budsjett = round(random.expovariate(0.005).real)
 
     email_msg = {'Message': {'Subject': f"Hei, din hemmelige venn er {hemmelig_venn}",

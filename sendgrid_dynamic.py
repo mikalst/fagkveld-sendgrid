@@ -10,14 +10,7 @@ def sendmail(name, email):
 
     mail.template_id = 'd-9dd397c8732f4c1f8df368eb104cab22'
 
-    url = urls[random.randint(0, len(urls))]
-
-    names = [
-        'Mikal',
-        'Andreas',
-        'Kristine',
-        'Torkel'
-    ]
+    url = urls[random.randint(0, len(urls) - 1)]
 
     mail.dynamic_template_data = { 'secret_santa_name' : name, 'gif_url': url }
 
@@ -30,4 +23,5 @@ def sendmail(name, email):
     print(response.status_code)
     print(response.headers)
 
-sendmail("Mikal", 'ingrid.giaver@visma.com')
+if __name__ == "__main__":
+    sendmail("Mikal", 'mikal.stapnes@visma.com')
