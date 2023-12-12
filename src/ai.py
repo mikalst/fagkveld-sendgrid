@@ -13,7 +13,7 @@ OPENAI_API_BASE = "https://oai-twoday-testing-2.openai.azure.com/"
 OPENAI_API_VERSION = "2023-12-01-preview"
 OPENAI_API_KEY = ""
 
-def createOpenAIClient():
+def create_openai_client():
     api_key=os.environ.get('OPENAI_API_KEY')
 
     if (api_key == None):
@@ -32,7 +32,7 @@ def generate_text(client: AzureOpenAI, gpt_prompt: str, gpt_system_message: str,
             {"role": "user", "content": gpt_prompt},
             {"role": "system", "content": gpt_system_message},
         ],
-        temperature=0.6,
+        temperature=0.9,
     )
     
     return response.choices[0].message.content
@@ -50,30 +50,6 @@ def generate_image_b64(client: AzureOpenAI, dalle_prompt: str):
     )
 
     return image_object
-
-def createChristmasCard(dalle_image_prompt: str, gpt_prompt: str, gpt_system_message: str, run_without_open_ai: bool, gpt_deployment: str = "gpt-4"):
-    if (run_without_open_ai):
-        stored_file_jpeg_path = "GeneratedImages/jpeg/Realistic_2023-12-04_19-32-42.jpeg"
-        with open("text.txt", 'r') as input_file:
-            message = input_file.read()
-
-        image_text.put_text_on_image(
-            input_image_path=stored_file_jpeg_path, 
-            text_content=message
-        )
-
-        return
-    
-    client = createOpenAIClient()
-
-    message = generate_text(client, gpt_prompt, gpt_system_message, deployment=gpt_deployment)
-
-
-
-    image_text.put_text_on_image(
-        input_image_path=stored_file_jpeg_path, 
-        text_content=message
-    )
 
 # generer tilfeldig tekster til bilde i en loop som sender mail med Mikal sin
 # createChristmasCard(

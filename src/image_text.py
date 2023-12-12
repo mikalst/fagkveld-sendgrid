@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
  
 # Image Configs
 font_size = 36
-text_color = "black"
+text_color = "yellow"
 line_spacing = 1.3 
 
 def put_text_on_image(input_image_path: str, text_content, output_image_path, font_path):
