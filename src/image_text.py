@@ -1,8 +1,9 @@
 from PIL import Image, ImageDraw, ImageFont
  
 # Image Configs
-font_size = 36
-text_color = "yellow"
+font_size = 46
+text_color = 'white'
+text_bg_color = 'black'
 line_spacing = 1.3 
 
 def put_text_on_image(input_image_path: str, text_content, output_image_path, font_path):
@@ -12,7 +13,8 @@ def put_text_on_image(input_image_path: str, text_content, output_image_path, fo
 
     # Create a drawing object and font object
     draw = ImageDraw.Draw(original_image)
-    font = ImageFont.truetype(font_path, font_size)
+    font = ImageFont.truetype(font_path, font_size, encoding='unic')
+    large_font = ImageFont.truetype(font_path, font_size, encoding='unic')
 
     # get max width of image
     max_width = int(image_width * 0.9)
@@ -24,6 +26,10 @@ def put_text_on_image(input_image_path: str, text_content, output_image_path, fo
     
     for line in wrapped_text:
         line_width = font.getlength(line)
+        draw.text(((image_width - line_width) // 2 - 2, y), line, text_bg_color, font=font)
+        draw.text(((image_width - line_width) // 2 + 2, y), line, text_bg_color, font=font)
+        draw.text(((image_width - line_width) // 2, y - 2), line, text_bg_color, font=font)
+        draw.text(((image_width - line_width) // 2, y + 2), line, text_bg_color, font=font)
         draw.text(
             ((image_width - line_width) // 2, y), 
             line, 
